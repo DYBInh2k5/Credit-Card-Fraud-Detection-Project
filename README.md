@@ -1,10 +1,13 @@
 # Credit Card Fraud Detection Project
 
 [![CI](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/ci.yml)
+[![Docker Publish](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/docker-publish.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-brightgreen)](https://github.com/dependabot)
 
 ML project for transaction fraud detection with imbalanced data.
+
+Vietnamese documentation: [README.vi.md](README.vi.md)
 
 ## Goal
 - Detect fraudulent transactions with a risk score in range [0, 1].
@@ -189,6 +192,8 @@ Notes:
 
 ## GitHub Automation
 - CI workflow runs on every push and pull request to main.
+- Docker publish workflow pushes images to GHCR on main and tag pushes.
+- Release workflow creates GitHub release notes from CHANGELOG on tag push.
 - Issue templates are available for bug reports and feature requests.
 - Pull request template enforces change summary and validation checklist.
 - Dependabot opens weekly update PRs for pip packages and GitHub Actions.

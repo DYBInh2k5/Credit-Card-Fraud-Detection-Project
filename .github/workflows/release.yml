@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build release notes from changelog
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          awk -v tag="$TAG" '
+            $0 ~ "^## \\["tag"\\]" {flag=1; next}
+            flag && $0 ~ "^## \\[" {exit}
+            flag {print}
+          ' CHANGELOG.md > RELEASE_BODY.md
+
+          if [ ! -s RELEASE_BODY.md ]; then
+            echo "Release $TAG" > RELEASE_BODY.md
+            echo >> RELEASE_BODY.md
+            echo "See CHANGELOG.md for details." >> RELEASE_BODY.md
+          fi
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: RELEASE_BODY.md
+          generate_release_notes: true

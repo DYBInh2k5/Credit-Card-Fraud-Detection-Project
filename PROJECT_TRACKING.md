@@ -19,6 +19,9 @@
 - [x] Add GitHub Actions CI workflow
 - [x] Add GitHub Issue and PR templates
 - [x] Add Dependabot configuration
+- [x] Add Docker publish workflow to GHCR
+- [x] Add release workflow based on git tags and changelog
+- [x] Add Vietnamese README
 - [x] Add config-based risk thresholds and score weights
 - [x] Add README with run instructions
 - [ ] Train on real `creditcard.csv`
@@ -34,8 +37,12 @@
 - Audit logs path: `reports/audit/alerts_YYYYMMDD.csv` and `.jsonl`
 - Container files: `Dockerfile`, `docker-compose.yml`
 - GitHub workflow: `.github/workflows/ci.yml`
+- Docker workflow: `.github/workflows/docker-publish.yml`
+- Release workflow: `.github/workflows/release.yml`
 - GitHub templates: `.github/ISSUE_TEMPLATE/*`, `.github/pull_request_template.md`
 - Dependency automation: `.github/dependabot.yml`
+- Changelog: `CHANGELOG.md`
+- Vietnamese docs: `README.vi.md`
 
 ## Notes
 - The dataset is not committed to git (`data/*.csv` is ignored).
