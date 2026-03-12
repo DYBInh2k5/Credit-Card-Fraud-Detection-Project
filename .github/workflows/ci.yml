@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Basic checks
+        run: |
+          python -m compileall src
+          python src/train.py --help
+          python src/evaluate.py --help
+          python src/predict.py --help
+
+      - name: End-to-end smoke run
+        run: |
+          python - <<'PY'
+          import numpy as np
+          import pandas as pd
+          from pathlib import Path
+
+          rng = np.random.default_rng(7)
+          n = 1000
+
+          frame = {
+              "Time": rng.integers(0, 172800, size=n),
+              "Amount": np.clip(rng.lognormal(mean=3.0, sigma=1.0, size=n), 0.1, 3000),
+          }
+          for i in range(1, 11):
+              frame[f"V{i}"] = rng.normal(0, 1, size=n)
+
+          y = np.zeros(n, dtype=int)
+          fraud_idx = rng.choice(n, size=45, replace=False)
+          y[fraud_idx] = 1
+          frame["Class"] = y
+
+          output = Path("data") / "ci_sample.csv"
+          output.parent.mkdir(parents=True, exist_ok=True)
+          pd.DataFrame(frame).to_csv(output, index=False)
+          print(f"Generated {output} with fraud_count={int(y.sum())}")
+          PY
+
+          python src/train.py --data-path data/ci_sample.csv --model-path models/ci_model.joblib --metrics-path reports/ci_training_metrics.json --report-path reports/ci_training_report.md
+          python src/evaluate.py --data-path data/ci_sample.csv --model-path models/ci_model.joblib --output-json reports/ci_evaluation_metrics.json --output-md reports/ci_evaluation_report.md
+          python src/predict.py --input-csv data/ci_sample.csv --model-path models/ci_model.joblib --output-csv reports/ci_predictions.csv --top-k 3
+
+      - name: Validate generated artifacts
+        run: |
+          test -f models/ci_model.joblib
+          test -f reports/ci_training_metrics.json
+          test -f reports/ci_evaluation_metrics.json
+          test -f reports/ci_predictions.csv

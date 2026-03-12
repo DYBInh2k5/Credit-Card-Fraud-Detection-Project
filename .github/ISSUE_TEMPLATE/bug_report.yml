@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a reproducible problem in training, evaluation, prediction, or API.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened and what did you expect to happen?
+      placeholder: Clear and concise summary
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps To Reproduce
+      description: List exact commands and input files used.
+      placeholder: |
+        1. Run ...
+        2. Use dataset ...
+        3. See error ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and Traceback
+      description: Paste full error logs or traceback.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and relevant package versions.
+      placeholder: |
+        OS:
+        Python:
+        xgboost:
+        fastapi:
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I can reproduce this on the latest main branch.
+          required: false

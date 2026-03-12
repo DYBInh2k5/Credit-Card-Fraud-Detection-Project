@@ -1,0 +1,40 @@
+name: Feature Request
+description: Suggest an improvement for model quality, API, deployment, or developer workflow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What limitation are you facing today?
+      placeholder: Describe current pain point
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe your idea and expected behavior.
+      placeholder: Describe your proposed implementation
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches considered?
+      placeholder: Optional alternatives
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected Impact
+      description: How should we measure success?
+      placeholder: Quality, latency, maintainability, etc.
+    validations:
+      required: false

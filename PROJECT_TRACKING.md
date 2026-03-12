@@ -16,6 +16,9 @@
 - [x] Enforce strict request schema validation by feature set
 - [x] Add per-IP rate limiting for scoring endpoints
 - [x] Add Dockerfile and docker-compose for deployment
+- [x] Add GitHub Actions CI workflow
+- [x] Add GitHub Issue and PR templates
+- [x] Add Dependabot configuration
 - [x] Add config-based risk thresholds and score weights
 - [x] Add README with run instructions
 - [ ] Train on real `creditcard.csv`
@@ -30,6 +33,9 @@
 - Realtime scoring API path: `src/api.py`
 - Audit logs path: `reports/audit/alerts_YYYYMMDD.csv` and `.jsonl`
 - Container files: `Dockerfile`, `docker-compose.yml`
+- GitHub workflow: `.github/workflows/ci.yml`
+- GitHub templates: `.github/ISSUE_TEMPLATE/*`, `.github/pull_request_template.md`
+- Dependency automation: `.github/dependabot.yml`
 
 ## Notes
 - The dataset is not committed to git (`data/*.csv` is ignored).

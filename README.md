@@ -1,5 +1,9 @@
 # Credit Card Fraud Detection Project
 
+[![CI](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/DYBInh2k5/Credit-Card-Fraud-Detection-Project/actions/workflows/ci.yml)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-brightgreen)](https://github.com/dependabot)
+
 ML project for transaction fraud detection with imbalanced data.
 
 ## Goal
@@ -182,3 +186,9 @@ Notes:
 - Add feature engineering for `Time` and `Amount`.
 - Add calibration and business-oriented threshold tuning (precision/recall targets).
 - Add drift detection dashboard for production traffic.
+
+## GitHub Automation
+- CI workflow runs on every push and pull request to main.
+- Issue templates are available for bug reports and feature requests.
+- Pull request template enforces change summary and validation checklist.
+- Dependabot opens weekly update PRs for pip packages and GitHub Actions.
