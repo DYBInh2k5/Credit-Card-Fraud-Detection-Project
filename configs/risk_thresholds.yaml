@@ -1,0 +1,6 @@
+risk:
+  medium: 0.35
+  high: 0.70
+scoring:
+  xgb_weight: 0.80
+  iforest_weight: 0.20

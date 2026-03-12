@@ -1,0 +1,18 @@
+services:
+  fraud-api:
+    build: .
+    container_name: fraud-api
+    ports:
+      - "8000:8000"
+    environment:
+      FRAUD_MODEL_PATH: /app/models/fraud_detection_pipeline.joblib
+      FRAUD_AUDIT_DIR: /app/reports/audit
+      FRAUD_AUDIT_ENABLED: "true"
+      FRAUD_AUDIT_ALERTS_ONLY: "true"
+      FRAUD_RATE_LIMIT_ENABLED: "true"
+      FRAUD_RATE_LIMIT_REQUESTS: "120"
+      FRAUD_RATE_LIMIT_WINDOW_SECONDS: "60"
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+    restart: unless-stopped
